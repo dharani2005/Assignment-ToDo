@@ -2,6 +2,7 @@ package org.example;
 
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class TodoItem {
     private int id;
@@ -39,7 +40,7 @@ public class TodoItem {
     }
 
     public void setTitle(String title) {
-        if(title==null)
+        if(title==null||title.trim().isEmpty())
             throw new IllegalArgumentException("title should not be empty");
         this.title = title;
     }
@@ -86,7 +87,7 @@ return this.done;
         LocalDate current = LocalDate.now();
         return current.isAfter(deadLine);
     }
-    public String getSummary() {
+    /*public String getSummary() {
         String summary = "id:" + id + " title:" + title + " taskDescription:" + taskDescription;
 
         if (deadLine!= null) {
@@ -104,6 +105,30 @@ return this.done;
         }
 
         return summary;
+    }*/
+
+    @Override
+    public String toString() {
+        return "TodoItem{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", taskDescription='" + taskDescription + '\'' +
+                ", deadLine=" + deadLine +
+                ", done=" + done +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TodoItem todoItem = (TodoItem) o;
+        return id == todoItem.id && done == todoItem.done && Objects.equals(title, todoItem.title) && Objects.equals(taskDescription, todoItem.taskDescription) && Objects.equals(deadLine, todoItem.deadLine) && Objects.equals(creator, todoItem.creator);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, taskDescription, deadLine, done, creator);
     }
 }
 
