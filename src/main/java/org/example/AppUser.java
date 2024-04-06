@@ -7,6 +7,11 @@ public class AppUser {
     private String password;
     private AppRole role;
 
+    public AppUser(String username, String password) {
+        setUsername(username);
+        setPassword(password);
+    }
+
     public String getUsername() {
         return username;
     }

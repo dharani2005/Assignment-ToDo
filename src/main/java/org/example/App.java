@@ -12,6 +12,9 @@ public class App
     {
         Person p1 = new Person(4,"john","lithvik","dharani@gmail.com");
         Person p2= new Person(5,"mehrdad","javan","mehrdadjavan@gmail.com");
+        AppUser user= new AppUser("sreehan","happy");
+        System.out.println("App user details:"+user);
+        System.out.println(user.toString());
         System.out.println(p1.toString());
         LocalDate test = LocalDate.of(2024, 3, 22);
         TodoItem item = new TodoItem(5,"changing tire","mechanic person should change the tire",test,p1);
