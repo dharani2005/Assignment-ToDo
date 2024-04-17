@@ -123,12 +123,15 @@ return this.done;
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TodoItem todoItem = (TodoItem) o;
-        return id == todoItem.id && done == todoItem.done && Objects.equals(title, todoItem.title) && Objects.equals(taskDescription, todoItem.taskDescription) && Objects.equals(deadLine, todoItem.deadLine) && Objects.equals(creator, todoItem.creator);
+        return id == todoItem.id && done == todoItem.done
+                && Objects.equals(title, todoItem.title)
+                && Objects.equals(taskDescription, todoItem.taskDescription)
+                && Objects.equals(deadLine, todoItem.deadLine);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, taskDescription, deadLine, done, creator);
+        return Objects.hash(id, title, taskDescription, deadLine, done);
     }
 }
 

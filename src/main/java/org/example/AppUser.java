@@ -39,7 +39,7 @@ public class AppUser {
     public void setRole(AppRole role) {
         if(role==null)
             throw new IllegalArgumentException("Role can not be empty or null");
-        this.role = role;
+        this.role = AppRole.ROLE_APP_USER;
     }
 
     @Override
