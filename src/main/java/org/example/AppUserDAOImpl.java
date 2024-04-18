@@ -16,18 +16,20 @@ public class AppUserDAOImpl implements AppUserDAO{
     @Override
     public AppUser persist(AppUser appUser) {
         if(appUser == null)throw new IllegalArgumentException("appuser should not be null");
+        if(storage.contains(appUser)){
+            throw new IllegalArgumentException("This Appuser is already created");
+        }
         for(AppUser appUser1: storage)
         {
-            if(appUser1.getPassword().equals(appUser.getPassword()))
+            if(appUser1.getUsername().equals(appUser.getUsername()))
             {
-                if(storage.contains(appUser1)){
                     throw new IllegalArgumentException("This Appuser is already created");
-                }
-              storage.add(appUser1);
+
+            }
+
         }
-        return appUser1;
-        }
-        return null;
+        storage.add(appUser);
+        return appUser;
     }
 
         /*Optional<AppUser> appUserOptional= find(appUser.getUsername());*/

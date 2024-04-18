@@ -13,23 +13,17 @@ public class PersonDAOImpl implements PersonDAO{
 
     @Override
     public Person persist(Person person) {
-        if(person == null)throw new IllegalArgumentException("person should not be null");
-        int id=PersonIdSequencer.nextId();
-        person.setId(id);
-        for(Person person1:personList)
+        if(person==null)throw new IllegalArgumentException("Todoitem cannot be null");
+        for(Person persons:personList)
         {
-            if(personList.contains(person1))
-            {
-                throw new IllegalArgumentException("This person is already created");
+            if(persons.getEmail().equals(person.getEmail())){
+                throw new IllegalArgumentException("Todoitem cannot be same title");
             }
-              if(person1.getId()==person.getId())
-              {
-                  personList.add(person1);
-                }
-            return person1;
         }
-        // Optional<Person> personOptional = findByEmail(person.getEmail());
-        return null;
+        int id = PersonIdSequencer.nextId();
+        person.setId(id);
+        personList.add(person);
+        return person;
     }
 
     @Override

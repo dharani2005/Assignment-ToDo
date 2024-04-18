@@ -12,21 +12,17 @@ public class TodoItemTaskDAOImpl implements TodoItemTaskDAO{
 
     @Override
     public TodoItemTask persist(TodoItemTask todoItemTask) {
+        if(todoItemTask==null)throw new IllegalArgumentException("Todoitem cannot be null");
+        for(TodoItemTask todoItemTasks:todoItemTaskList)
+        {
+            if(todoItemTasks.getAssignee().equals(todoItemTask.getAssignee())){
+                throw new IllegalArgumentException("Todoitem cannot be same title");
+            }
+        }
         int id = TodoItemTaskIdSequencer.nextId();
         todoItemTask.setId(id);
-        if(todoItemTask==null) throw new IllegalArgumentException("Todoitemtask should not be null");
-        for(TodoItemTask todoItemTask1:todoItemTaskList)
-        {
-            if (todoItemTask1.getId() == todoItemTask.getId())
-            {
-             if(todoItemTaskList.contains(todoItemTask1)) {
-                 throw new IllegalArgumentException("Todoitemtask is already created");
-             }
-             todoItemTaskList.add(todoItemTask1);
-                }
-           return todoItemTask1;
-        }
-        return null;
+        todoItemTaskList.add(todoItemTask);
+        return todoItemTask;
     }
 
     @Override

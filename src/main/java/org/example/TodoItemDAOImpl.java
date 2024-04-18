@@ -13,22 +13,17 @@ public class TodoItemDAOImpl implements TodoItemDAO{
 
     @Override
     public TodoItem persist(TodoItem todoItem) {
-        int id = TodoItemIdSequencer.nextId();
-        todoItem.setId(id);
         if(todoItem==null)throw new IllegalArgumentException("Todoitem cannot be null");
         for(TodoItem todoItem1:todoItemList)
         {
-            if(todoItem1.getId()==todoItem.getId())
-            {
-            if(todoItemList.contains(todoItem1))
-            {
-                throw new IllegalArgumentException("Todoitem is already created");
+            if(todoItem1.getTitle().equals(todoItem.getTitle())){
+                throw new IllegalArgumentException("Todoitem cannot be same title");
             }
-            todoItemList.add(todoItem1);
         }
-            return todoItem1;
-        }
-        return null;
+        int id = TodoItemIdSequencer.nextId();
+        todoItem.setId(id);
+        todoItemList.add(todoItem);
+        return todoItem;
     }
 
     @Override
@@ -87,13 +82,32 @@ public class TodoItemDAOImpl implements TodoItemDAO{
     @Override
     public Collection<TodoItem> findByDeadlineBefore(LocalDate date) {
         //TODO:
-        return null;
+        if(date==null)throw new IllegalArgumentException("Date should not be null");
+        List<TodoItem> todoItemListBeforeDeadline = new ArrayList<>();
+
+        for(TodoItem todoItem : todoItemList)
+        {
+            if(date.isBefore(todoItem.getDeadLine()))
+            {
+                todoItemListBeforeDeadline.add(todoItem);
+            }
+        }
+        return todoItemListBeforeDeadline;
     }
 
     @Override
     public Collection<TodoItem> findByDeadlineAfter(LocalDate date) {
-       //TODO:
-        return null;
+        if(date==null)throw new IllegalArgumentException("Date should not be null");
+        List<TodoItem> todoItemListAfterDeadline = new ArrayList<>();
+
+        for(TodoItem todoItem : todoItemList)
+        {
+            if(date.isAfter(todoItem.getDeadLine()))
+            {
+                todoItemListAfterDeadline.add(todoItem);
+            }
+        }
+        return todoItemListAfterDeadline;
     }
 
     @Override

@@ -12,8 +12,8 @@ public class TodoItem {
     private boolean done;
     private Person creator;
 
-    public TodoItem(int id, String title, String taskDescription, LocalDate deadLine, Person creator) {
-        this.id=id;
+    public TodoItem(String title, String taskDescription, LocalDate deadLine, Person creator) {
+
         setTitle(title);
         setTaskDescription(taskDescription);
         setDeadLine(deadLine);
@@ -69,7 +69,10 @@ public class TodoItem {
             throw new IllegalArgumentException("deadLine should not be null");
         this.deadLine = deadLine;
     }
+    public boolean IsBeforeDeadLine(LocalDate date){
 
+        return date.isBefore(deadLine);
+    }
     public void setDone() {
         this.done = !isOverdue();
     }
